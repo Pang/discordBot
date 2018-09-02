@@ -46,7 +46,6 @@ bot.on('message', async message => {
     }
 
     if (cmd === `${prefix}report`){
-
         let reportedUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
         if(!reportedUser) return message.channel.send("Couldn't find user.");
 
@@ -62,12 +61,11 @@ bot.on('message', async message => {
         .addField("Time", message.createdAt)
         .addField("Reason", reason);
 
+        //finds correct admin only channel to print details of report
         let reportsChannel = message.guild.channels.find(x => x.name === "reports-and-tests");
         if(!reportsChannel) return message.channel.send("Couldn't find report/test channel.");
-
         return reportsChannel.send(reportEmbed);
     }
-
 });
 
 bot.login(botconfig.token);
