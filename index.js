@@ -4,7 +4,7 @@ const bot = new Discord.Client();
 
 bot.on('ready', async () => {
     console.log(`${bot.user.username} is online`);
-    //bot.user.setActivity('being tested');
+    bot.user.setActivity('being tested');
 });
 
 bot.on('message', async message => {
@@ -17,7 +17,22 @@ bot.on('message', async message => {
     let cmd = messageArray[0];
     let args = messageArray.slice(1);
 
-    if (cmd == `${prefix}hello`){
+    if (cmd === `${prefix}help`){
+        let cmdList = [
+            '"!hello" - Says hello back!',
+            '"!botinfo" - Displays information about the bot',
+            '"!serverinfo" - Displays information about the server',
+            '"!report [UserTag] [Reason]" - Requires the reported users tag and a reason'
+        ];
+        
+        for(x = 0 ; x < cmdList.length ; x++){
+            message.channel.send(cmdList[x]);
+        }
+
+        return;
+    }
+
+    if (cmd === `${prefix}hello`){
         return message.channel.send("Hello!");
     }
 
